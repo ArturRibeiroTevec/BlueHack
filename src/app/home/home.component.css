@@ -1,3 +1,7 @@
-.bg {
-    background-image: url("../assets/bg.png");
+.light-blue.lighten-1 {
+    background-color: #26a69a !important;
+}
+
+.btn, .btn-large {
+    width: 176px !important;
 }
