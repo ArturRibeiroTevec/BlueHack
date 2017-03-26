@@ -1,0 +1,9 @@
+<ul class="collection with-header">
+  <li class="collection-header"><h4>Contrato Google</h4></li>
+  <li *ngFor="let analise of analises"  class="collection-item">
+    <div>
+        <h4>{{analise.title}}</h4>
+        {{analise.body}}
+    </div>
+  </li>
+</ul>

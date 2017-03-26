@@ -1,12 +1,13 @@
-
-<div>
-  <div *ngFor="let resposta of respostas"  class="row">
-    <span>{{resposta}}</span>
-  </div>
-</div>
-<div class="row">
-    <div class="input-field col s6">
-      <input  #texto (keyup.enter)="conversar(texto.value)" id="texto" type="text" class="validate">
-      <label class="active" for="texto">Digite aqui</label>
+  <ol class="chat">
+  <li *ngFor="let resposta of conversa" [ngClass]="[resposta.tipo === 'pergunta' ? 'self' : 'other' ]">
+    <div class="avatar">
+      <img *ngIf="resposta.tipo === 'resposta'" src="http://i.imgur.com/DY6gND0.png" draggable="false"/>
+      <img  *ngIf="resposta.tipo === 'pergunta'" src="http://i.imgur.com/HYcn9xO.png" draggable="false"/>
     </div>
-</div>
+    <div class="msg">
+      <p>{{resposta.valor}}</p>
+      <iframe hidden *ngIf="resposta.audio" [src]="resposta.audio" ></iframe>
+    </div>
+  </li>
+  </ol>
+  <input class="textarea"  #texto (keyup.enter)="conversar(texto)" type="text" placeholder="Mensagem"/>

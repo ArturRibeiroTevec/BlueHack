@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from "@angular/platform-browser";
 
 import { ChatService } from './chat.service';
 
@@ -9,20 +10,32 @@ import { ChatService } from './chat.service';
 })
 export class ChatComponent implements OnInit {
 
-  respostas: string[];
+  conversa: any[];
+  audio: any;
 
-  constructor(private chatService: ChatService) { 
-    this.respostas = [];
+  constructor(private chatService: ChatService, private domSanitizer: DomSanitizer) { 
+    this.conversa = [];
   }
 
   ngOnInit() {
-    
   }
 
   conversar(texto) {
-    this.chatService.conversar(texto).subscribe(resposta => {
-      this.respostas.push(resposta);
+    this.chatService.conversar(texto.value).subscribe(resposta => {
+
+      let _resposta = resposta;
+
+      this.chatService.falarSom(_resposta).
+        subscribe(audio => {
+          
+          let _audio = this.domSanitizer.bypassSecurityTrustResourceUrl(audio);
+          this.conversa.push({'tipo': 'resposta', 'valor': _resposta, 'audio': _audio});
+        });
+
     });
+
+    this.conversa.push({'tipo': 'pergunta', 'valor': texto.value, 'audio': null});
+    texto.value = '';
   }
 
 }

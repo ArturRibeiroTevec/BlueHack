@@ -69,4 +69,24 @@ export class ChatService {
       })
       .catch((error: any) => Observable.throw( console.log(error) || 'Server error'));
   }
+
+  falarSom(texto) {
+
+    let headers = new Headers();
+
+    headers.append('Authorization', 'Basic ' +
+      btoa('f48bdf26-4552-4067-a104-429a17733bb6:RdajM5xsZTGm'));
+
+    return this._http.get(
+      'https://stream.watsonplatform.net/text-to-speech/api/v1/synthesize?accept=audio/wav&text='+texto+'&voice=pt-BR_IsabelaVoice',
+      {
+        headers: headers
+      })
+      .map((res: Response ) => {
+          return res.url
+      })
+      .catch((error: any) => Observable.throw( console.log(error) || 'Server error'));
+
+  }
+
 }

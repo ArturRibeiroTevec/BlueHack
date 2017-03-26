@@ -8,7 +8,8 @@
 
 nav ul a,
 nav .brand-logo {
-  color: #444;
+  color: #fff;
+  font-size: 18px
 }
 
 p {
@@ -16,7 +17,7 @@ p {
 }
 
 .button-collapse {
-  color: #26a69a;
+  color: #fff;
 }
 
 .parallax-container {
